@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>403 Page</title>
+</head>
+<body>
+	<div th:insert="~{link :: links}"></div>
+	<div th:insert="~{header :: header}"></div>
+	<section class="page_error section-padding--lg bg--white">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="error__inner text-center">
+							<div class="error__logo">
+								<a href="#"><img th:src="@{/images/others/404.jpg}" alt="error images"></a>
+							</div>
+							<div class="error__content">
+								<h2>error - not found</h2>
+								<p>It looks like you are lost! Try searching here</p>
+								<div class="search_form_wrapper">
+									<form action="#">
+										<div class="form__box">
+											<input type="text" placeholder="Search...">
+											<button><i class="fa fa-search"></i></button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<div th:insert="~{footer :: footer}"></div>
+    <script th:src="@{/resources/js/vendor/modernizr-3.5.0.min.js}"></script>
+	<script th:src="@{/resources/js/vendor/jquery-3.2.1.min.js}" ></script>
+	<script th:src="@{/resources/js/popper.min.js}" ></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}" ></script>
+	<script th:src="@{/resources/js/plugins.js}"></script>
+	<script th:src="@{/resources/js/active.js}"></script>
+	<script th:src="@{/resources/js/ajax.js}"></script>
+</body>
+</html>
