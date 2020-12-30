@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>List Products</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/mystyle.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<h2>MANAGER PRODUCTS</h2>
+		<p>
+			<a class="btn btn-primary" href="/product/"><i
+				class="far fa-plus-square"></i> ADD PRODUCT</a>
+		</p>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID Product</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Image</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item: ${PRODUCTS}">
+					<td th:text="${item.id}"></td>
+					<td th:text="${item.name}"></td>
+					<td th:text="${item.category.name}"></td>
+					<td width="200"><img alt="" th:src="@{${item.image}}"
+						width="80" height="100"></td>
+					<td th:text="${item.price}"></td>
+					<td><a class="btn btn-primary btn-sm"
+						th:href="@{'/product/edit/'+${item.id}}"><i
+							class="far fa-edit"></i> Edit</a> | 
+						<a class="btn btn-danger btn-sm"
+						th:href="@{'/product/delete/'+${item.id}}"><i
+							class="fas fa-trash-alt"></i> Delete</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
