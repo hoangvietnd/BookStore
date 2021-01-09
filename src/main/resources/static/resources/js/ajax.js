@@ -73,8 +73,24 @@ $(document).ready(function () {
                 id: value,
             }
         }).done(function (items1) {
+        	alert('Đã thêm vào giỏ hàng');
         	console.log(items1)
-            displayCart(items1);
+        });
+    });
+    
+    $('.removeCart').click(function () {
+        var value = this.id;
+        console.log(value);
+        $.ajax({
+            method: 'GET',
+            url: 'removeCart',
+            dataType: 'json',
+            cache: false,
+            data: {
+                id: value,
+            }
+        }).done(function (items1) {
+        	console.log(items1)
         });
     });
 
@@ -115,25 +131,25 @@ $(document).ready(function () {
         });
     });
 
-    $('#filter').on('click', function () {
-        var value = $('#amount').val().trim();
-        var res = value.split("-");
-        var res1 = res[0].split("$");
-        var res2 = res[1].split("$");
-        var price1 = res1[1].trim();
-        var price2 = res2[1].trim();
-        console.log("Price 1 : "+price1+" Price 2 : "+price2)
+    $('.quickview').on('click', function () {
+        var value = this.id;
+        console.log(value);
         $.ajax({
             method: 'GET',
-            url: 'filterPrice',
+            url: 'quickview',
             dataType: 'json',
             cache: false,
             data: {
-                price1: price1,
-                price2: price2
+                id: value,
             }
         }).done(function (book) {
-            displayBook(book);
+            console.log(book);
+            var imageUrl='';
+            imageUrl += '<img alt="big images" src="..'+book.image+'">'
+            $('#quickBookName').text(book.name);
+            $('#quickBookImage').html(imageUrl);
+            $('.new-price').text(book.price);
+            $('#productmodal').modal('show');
         });
     });
     
@@ -155,13 +171,31 @@ $(document).ready(function () {
                 }else{
                 s += '<div class="alert alert-info">';
                 for(var i = 0; i < book.length; i++){
-                	s +='<a href="#" class="alert-link">'+ book[i].name+'</a></br>'
+                	s +='<a href="singleProduct/'+book[i].id+'" class="alert-link">'+ book[i].name+'</a></br>'
                 }
                 	s += '</div>';
                 }
                 $("#autoCompleteSearch").html(s);
            });    
     });
+ 
+    $('.quantity').blur(function() {
+        var newQuantity = $('.quantity').val();
+        var id = this.id;
+    		$.ajax({
+                method : 'GET',
+                url : 'updateCart',
+                dataType : 'json',
+                cache: false,
+    		    data :{ 
+                    id : id,
+                    newQuantity : newQuantity ,
+    		    }
+    		}).done(function (book) {
+    			$('.cart-total').text(book.total);
+           });    
+    });
+    
 });
 
 

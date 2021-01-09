@@ -38,7 +38,13 @@ public class ShoppingCart {
 		}
 	}
 
-	public synchronized List getItems() {
+	public synchronized void update(int id, int quantity) {
+		if (items.containsKey(id)) {
+			ShoppingCartItem scitem = (ShoppingCartItem) items.get(id);
+			scitem.setQuantity(quantity);
+		}
+	}
+	public synchronized List<ShoppingCartItem> getItems() {
 		List results = new ArrayList();
 		results.addAll(this.items.values());
 		return results;

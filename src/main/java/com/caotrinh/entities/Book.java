@@ -16,9 +16,8 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoryId")
-	private Category category;
+	
+	private String category;
 	private String name;
 	private double price;
 	private String image;
@@ -27,29 +26,12 @@ public class Book {
 		super();
 	}
 
-	public Book(int id, Category category, String name, double price, String image) {
-		super();
-		this.id = id;
-		this.category = category;
-		this.name = name;
-		this.price = price;
-		this.image = image;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public String getName() {
@@ -74,6 +56,14 @@ public class Book {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }

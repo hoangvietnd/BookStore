@@ -57,45 +57,11 @@ public class RestController {
 		System.out.println("Name : "+name);
 		return bookService.autoComplete(name);
 	}
-	/*
-	 * Shopping cart
-	 */
-	@GetMapping("/addCart")
-	public ShoppingCart addCart(HttpSession session, int id) {
-		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-		if (cart == null) {
-			cart = new ShoppingCart();
-			session.setAttribute("cart", cart);
-		}
-		if (id != 0) {
-			Book p = bookService.findBookById(id);
-			cart.add(id, p);
-			System.out.println("them san pham vao gio hang thanh cong");
-		}
-		return cart;
-	}
 	
-	@GetMapping("/removeCart")
-	public ShoppingCart removeCart(HttpSession session, int id) {
-		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-		if (cart == null) {
-			cart = new ShoppingCart();
-			session.setAttribute("cart", cart);
-		}
-		if (id != 0) {
-			cart.remove(id);
-		}
-		return cart;
-	}
-	
-	@GetMapping("/getCart")
-	public List getCart(HttpSession session) {
-		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-		if (cart == null) {
-			cart = new ShoppingCart();
-			session.setAttribute("cart", cart);
-		}
-		return cart.getItems();
+	@GetMapping("/quickview")
+	public Book quickView(int id) {
+		System.out.println("Book Id : "+id);
+		return bookService.findBookById(id);
 	}
 	
 	@GetMapping("/checkUserName")
@@ -107,11 +73,18 @@ public class RestController {
 			return false;
 		}
 	}
-	
+	@GetMapping(value= {"/addCart/updateCart","/removeCart/updateCart","/updateCart","/cart/updateCart"})
+	public ShoppingCart updateCart(HttpSession session,int id, int newQuantity) {
+		System.out.println("Id "+id+" newQuantity "+newQuantity);
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+		cart.update(id, newQuantity);
+		return cart;
+	}
 	@PostMapping("/sendMail")
-	public boolean sendMail(@ModelAttribute("contact") ContactEmail contactEmail) {
+	public String sendMail(@ModelAttribute("contact") ContactEmail contactEmail) {
 		System.out.println(contactEmail.toString());
 		mailService.sendMail(contactEmail);
-		return true;
+		return "Tin nhắn của bạn đã được gửi đi";
 	}
+	
 }

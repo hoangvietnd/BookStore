@@ -22,13 +22,13 @@
 				<div class="product product__style--3" th:each="book : ${listBook}">
 						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 							<div class="product__thumb">
-								<a class="first__img" href="single-product.html"><img alt="product image"  th:src="@{${book.image}}"/></a>
+								<a class="first__img" th:href="@{'/singleProduct/'+${book.id}}"><img alt="product image"  th:src="@{${book.image}}"/></a>
 								<div class="hot__box">
 									<span class="hot-label">BEST SALLER</span>
 								</div>
 							</div>
 							<div class="product__content content--center">
-								<h4><a href="single-product.html" th:text="${book.name}"></a></h4>
+								<h4><a th:href="@{'/singleProduct/'+${book.id}}" th:text="${book.name}"></a></h4>
 								<ul class="prize d-flex">
 									<li th:text="${book.price} "></li>
 									<li class="old_prize">$35.00</li>
@@ -36,10 +36,10 @@
 								<div class="action">
 									<div class="actions_inner">
 										<ul class="add_to_links">
-											<li><a class="addCart" th:id ="${book.id}"><i class="bi bi-shopping-bag4"></i></a></li>
+											<li><a class="addCart" th:href="@{'/addCart/'+${book.id}}"><i class="bi bi-shopping-bag4"></i></a></li>
 											<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
 											<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-											<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+											<li><a data-toggle="modal" title="Quick View" class="quickview" th:id="${book.id}" href="#productmodal"><i class="bi bi-search"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -119,13 +119,13 @@
 				<div class="col-lg-3 col-md-4 col-sm-6 col-12" th:each="book : ${listBook}">
 				<div class="product product__style--3">
 							<div class="product__thumb">
-								<a class="first__img" href="single-product/${book.id}"><img alt="product image"  th:src="${book.image}"/></a>
+								<a class="first__img" th:href="@{'/singleProduct/'+${book.id}}"><img alt="product image"  th:src="${book.image}"/></a>
 								<div class="hot__box">
 									<span class="hot-label" th:text="${book.name} "></span>
 								</div>
 							</div>
 							<div class="product__content content--center content--center">
-								<h4><a href="single-product.html" th:text="${book.name}"></a></h4>
+								<h4><a th:href="@{'/singleProduct/'+${book.id}}" th:text="${book.name}"></a></h4>
 								<ul class="prize d-flex">
 									<li th:text="${book.price}"></li>
 									<li class="old_prize">$35.00</li>
@@ -133,10 +133,12 @@
 								<div class="action">
 									<div class="actions_inner">
 										<ul class="add_to_links">
-											<li><a class="cart" href="#" id="${book.id }"><i class="bi bi-shopping-bag4"></i></a></li>
+											<li><a class="cart" th:href="@{'/addCart/'+${book.id}}"><i class="bi bi-shopping-bag4"></i></a></li>
 											<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
 											<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-											<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+											<li><a data-toggle="modal" title="Quick View"
+													class="quickview" th:id="${book.id}"
+													href="#productmodal"><i class="bi bi-search"></i></a></li>
 										</ul>
 									</div>
 								</div>
@@ -254,13 +256,13 @@
 		                    <div class="modal-product">
 		                        <!-- Start product images -->
 		                        <div class="product-images">
-		                            <div class="main-image images">
-		                                <img alt="big images" src="images/product/big-img/1.jpg">
+		                            <div class="main-image images" id="quickBookImage">
+		                                
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
 		                        <div class="product-info">
-		                            <h1>Simple Fabric Bags</h1>
+		                            <h1 id ="quickBookName"></h1>
 		                            <div class="rating__and__review">
 		                                <ul class="rating">
 		                                    <li><span class="ti-star"></span></li>
@@ -275,31 +277,12 @@
 		                            </div>
 		                            <div class="price-box-3">
 		                                <div class="s-price-box">
-		                                    <span class="new-price">$17.20</span>
+		                                    <span class="new-price"></span>
 		                                    <span class="old-price">$45.00</span>
 		                                </div>
 		                            </div>
 		                            <div class="quick-desc">
-		                                Designed for simplicity and made from high quality materials. Its sleek geometry and material combinations creates a modern look.
-		                            </div>
-		                            <div class="select__color">
-		                                <h2>Select color</h2>
-		                                <ul class="color__list">
-		                                    <li class="red"><a title="Red" href="#">Red</a></li>
-		                                    <li class="gold"><a title="Gold" href="#">Gold</a></li>
-		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
-		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
-		                                </ul>
-		                            </div>
-		                            <div class="select__size">
-		                                <h2>Select size</h2>
-		                                <ul class="color__list">
-		                                    <li class="l__size"><a title="L" href="#">L</a></li>
-		                                    <li class="m__size"><a title="M" href="#">M</a></li>
-		                                    <li class="s__size"><a title="S" href="#">S</a></li>
-		                                    <li class="xl__size"><a title="XL" href="#">XL</a></li>
-		                                    <li class="xxl__size"><a title="XXL" href="#">XXL</a></li>
-		                                </ul>
+		                                Thanh xuân là khoảng thời gian đẹp đẽ nhất trong đời, cũng là những năm tháng then chốt có thể quyết định tương lai của một người
 		                            </div>
 		                            <div class="social-sharing">
 		                                <div class="widget widget_socialsharing_widget">

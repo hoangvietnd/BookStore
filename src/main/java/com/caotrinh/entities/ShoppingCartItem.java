@@ -1,10 +1,10 @@
 package com.caotrinh.entities;
 
 public class ShoppingCartItem {
-    Object item;
+    Book item;
     int quantity;
 
-    public ShoppingCartItem(Object anItem) {
+    public ShoppingCartItem(Book anItem) {
         item = anItem;
         quantity = 1;
     }
@@ -17,7 +17,7 @@ public class ShoppingCartItem {
         quantity--;
     }
 
-    public Object getItem() {
+    public Book getItem() {
         return item;
     }
 
@@ -25,6 +25,15 @@ public class ShoppingCartItem {
         return quantity;
     }
 
+    public double getItemTotal() {
+    	return roundOff(quantity*item.getPrice());
+    }
+    
+    private double roundOff(double x) {
+		long val = Math.round(x * 100); // cents
+		return val / 100.0;
+	}
+    
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

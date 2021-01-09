@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <title>Header</title>
 </head>
+<style>
+.alert-link{
+	background-color: green;
+}
+</style>
 <body th:fragment="header">
 <div th:insert="~{link :: links}"></div>
 <div class="wrapper" id="wrapper">
@@ -13,7 +18,7 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-6 col-lg-2">
 						<div class="logo">
-							<a href="index">
+							<a th:href="@{/index}">
 							<img alt="logo images"  th:src="@{/resources/images/logo/logo.png}" />
 							</a>
 						</div>
@@ -21,16 +26,16 @@
 					<div class="col-lg-8 d-none d-lg-block">
 						<nav class="mainmenu__nav">
 							<ul class="meninmenu d-flex justify-content-start">
-								<li class="drop with--one--item"><a href="index" th:text="#{lb.home}"></a></li>
+								<li class="drop with--one--item"><a th:href="@{/index}" th:text="#{lb.home}"></a></li>
 								<li class="drop"><a href="#" th:text="#{lb.shop}"></a>
 									<div class="megamenu mega03">
 										<ul class="item item03">
 											<li class="title">Shop Layout</li>
-											<li><a href="shop-grid">Shop Grid</a></li>
-											<li><a href="single-product">Single Product</a></li>
+											<li><a th:href="@{/shop-grid}">Shop Grid</a></li>
+											<li><a th:href="@{/single-product}">Single Product</a></li>
 										</ul>
 										<ul class="item item03">
-											<li class="title">Shop Page</li>
+											<li class="title"><a th:href="@{/shop-grid}">Shop Page</a></li>
 											<li><a href="myaccount">My Account</a></li>
 											<li><a href="cart.html">Cart Page</a></li>
 											<li><a href="checkout">Checkout Page</a></li>
@@ -40,66 +45,66 @@
 										</ul>
 										<ul class="item item03">
 											<li class="title">Bargain Books</li>
-											<li><a href="shop-grid">Bargain Bestsellers</a></li>
-											<li><a href="shop-grid.html">Activity Kits</a></li>
-											<li><a href="shop-grid.html">B&N Classics</a></li>
-											<li><a href="shop-grid.html">Books Under $5</a></li>
-											<li><a href="shop-grid.html">Bargain Books</a></li>
+											<li><a th:href="@{/shop-grid}">Bargain Bestsellers</a></li>
+											<li><a th:href="@{/shop-grid}">Activity Kits</a></li>
+											<li><a th:href="@{/shop-grid}">B&N Classics</a></li>
+											<li><a th:href="@{/shop-grid}">Books Under $5</a></li>
+											<li><a th:href="@{/shop-grid}">Bargain Books</a></li>
 										</ul>
 									</div>
 								</li>
-								<li class="drop"><a href="shop-grid.html">Books</a>
+								<li class="drop"><a th:href="@{/shop-grid}" th:text="#{lb.books}"></a>
 									<div class="megamenu mega03">
 										<ul class="item item03">
 											<li class="title">Categories</li>
-											<li><a href="shop-grid.html" th:text="#{lb.biography}"> </a></li>
-											<li><a href="shop-grid.html" th:text="#{lb.business}"> </a></li>
-											<li><a href="shop-grid.html" th:text="#{lb.cookbook}"> </a></li>
-											<li><a href="shop-grid.html" th:text="#{lb.health}">Health & Fitness </a></li>
-											<li><a href="shop-grid.html" th:text="#{lb.history}">History </a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.biography}"> </a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.business}"> </a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.cookbook}"> </a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.health}"></a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.history}"></a></li>
 										</ul>
 										<ul class="item item03">
 											<li class="title">Customer Favourite</li>
-											<li><a href="shop-grid.html">Mystery</a></li>
-											<li><a href="shop-grid.html">Religion & Inspiration</a></li>
-											<li><a href="shop-grid.html">Romance</a></li>
-											<li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-											<li><a href="shop-grid.html">Sleeveless</a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.mystery}"></a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.inspiration}"></a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.romance}"></a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.fiction}"></a></li>
+											<li><a th:href="@{/shop-grid}" th:text="#{lb.self}">Sleeveless</a></li>
 										</ul>
 										<ul class="item item03">
 											<li class="title">Collections</li>
-											<li><a href="shop-grid.html">Science </a></li>
-											<li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-											<li><a href="shop-grid.html">Self-Improvemen</a></li>
-											<li><a href="shop-grid.html">Home & Garden</a></li>
-											<li><a href="shop-grid.html">Humor Books</a></li>
+											<li><a th:href="@{/shop-grid}">Science </a></li>
+											<li><a th:href="@{/shop-grid}">Fiction/Fantasy</a></li>
+											<li><a th:href="@{/shop-grid}">Self-Improvemen</a></li>
+											<li><a th:href="@{/shop-grid}">Home & Garden</a></li>
+											<li><a th:href="@{/shop-grid}">Humor Books</a></li>
 										</ul>
 									</div>
 								</li>
-								<li class="drop"><a href="shop-grid.html">Kids</a>
+								<li class="drop"><a th:href="@{/shop-grid}" th:text="#{lb.kids}"></a>
 									<div class="megamenu mega02">
 										<ul class="item item02">
 											<li class="title">Top Collections</li>
-											<li><a href="shop-grid.html">American Girl</a></li>
-											<li><a href="shop-grid.html">Diary Wimpy Kid</a></li>
-											<li><a href="shop-grid.html">Finding Dory</a></li>
-											<li><a href="shop-grid.html">Harry Potter</a></li>
-											<li><a href="shop-grid.html">Land of Stories</a></li>
+											<li><a th:href="@{/shop-grid}">American Girl</a></li>
+											<li><a th:href="@{/shop-grid}">Diary Wimpy Kid</a></li>
+											<li><a th:href="@{/shop-grid}">Finding Dory</a></li>
+											<li><a th:href="@{/shop-grid}">Harry Potter</a></li>
+											<li><a th:href="@{/shop-grid}">Land of Stories</a></li>
 										</ul>
 										<ul class="item item02">
 											<li class="title">More For Kids</li>
-											<li><a href="shop-grid.html">B&N Educators</a></li>
-											<li><a href="shop-grid.html">B&N Kids' Club</a></li>
-											<li><a href="shop-grid.html">Kids' Music</a></li>
-											<li><a href="shop-grid.html">Toys & Games</a></li>
-											<li><a href="shop-grid.html">Hoodies</a></li>
+											<li><a th:href="@{/shop-grid}">B&N Educators</a></li>
+											<li><a th:href="@{/shop-grid}">B&N Kids' Club</a></li>
+											<li><a th:href="@{/shop-grid}">Kids' Music</a></li>
+											<li><a th:href="@{/shop-grid}">Toys & Games</a></li>
+											<li><a th:href="@{/shop-grid}">Hoodies</a></li>
 										</ul>
 									</div>
 								</li>
 								<li class="drop"><a href="#" th:text="#{lb.pages}"></a>
 									<div class="megamenu dropdown">
 										<ul class="item item01">
-											<li><a href="about">About Page</a></li>
+											<li><a th:href="@{/about}">About Page</a></li>
 											<li class="label2"><a href="portfolio.html">Portfolio</a>
 												<ul>
 													<li><a href="portfolio.html">Portfolio</a></li>
@@ -107,7 +112,7 @@
 												</ul>
 											</li>
 											<li><a href="myaccount">My Account</a></li>
-											<li><a href="cart.html">Cart Page</a></li>
+											<li><a href="cart">Cart Page</a></li>
 											<li><a href="checkout.html">Checkout Page</a></li>
 											<li><a href="wishlist.html">Wishlist Page</a></li>
 											<li><a href="403">404 Page</a></li>
@@ -124,7 +129,7 @@
 										</ul>
 									</div>
 								</li>
-								<li><a href="contact" th:text="#{lb.contact}"></a></li>
+								<li><a th:href="@{/contact}" th:text="#{lb.contact}"></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -135,76 +140,7 @@
 							<li class="shopcart"><a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
 								<!-- Start Shopping Cart -->
 								<div class="block-minicart minicart_active">
-									<div class="minicart-content-wrapper">
-										<div class="micart__close">
-											<span>close</span>
-										</div>
-										<div class="items-total d-flex justify-content-between">
-											<span>3 items</span>
-											<span>Cart Subtotal</span>
-										</div>
-										<div class="total_amount text-right">
-											<span>$66.00</span>
-										</div>
-										<div class="mini_action checkout">
-											<a class="checkout__btn" href="cart.html">Go to Checkout</a>
-										</div>
-										<div class="single__items">
-											<div class="miniproduct">
-												<div class="item01 d-flex">
-													<div class="thumb">
-														<a href="product-details.html"><img src="images/product/sm-img/1.jpg" alt="product images"></a>
-													</div>
-													<div class="content">
-														<h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
-														<span class="prize">$30.00</span>
-														<div class="product_prize d-flex justify-content-between">
-															<span class="qun">Qty: 01</span>
-															<ul class="d-flex justify-content-end">
-																<li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-																<li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div class="item01 d-flex mt--20">
-													<div class="thumb">
-														<a href="product-details.html"><img src="images/product/sm-img/3.jpg" alt="product images"></a>
-													</div>
-													<div class="content">
-														<h6><a href="product-details.html">Impulse Duffle</a></h6>
-														<span class="prize">$40.00</span>
-														<div class="product_prize d-flex justify-content-between">
-															<span class="qun">Qty: 03</span>
-															<ul class="d-flex justify-content-end">
-																<li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-																<li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-												<div class="item01 d-flex mt--20">
-													<div class="thumb">
-														<a href="product-details.html"><img src="images/product/sm-img/2.jpg" alt="product images"></a>
-													</div>
-													<div class="content">
-														<h6><a href="product-details.html">Compete Track Tote</a></h6>
-														<span class="prize">$40.00</span>
-														<div class="product_prize d-flex justify-content-between">
-															<span class="qun">Qty: 03</span>
-															<ul class="d-flex justify-content-end">
-																<li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-																<li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="mini_action cart">
-											<a class="cart__btn" href="cart.html">View and edit cart</a>
-										</div>
-									</div>
+								
 								</div>
 								<!-- End Shopping Cart -->
 							</li>
@@ -262,7 +198,7 @@
 											<div class="switcher-options">
 												<div class="switcher-currency-trigger">
 													<div class="setting__menu">
-														<span><a href="#">Compare Product</a></span>
+														<span><a th:href="@{/logout}">Sign out</a></span>
 														<span><a href="#">My Account</a></span>
 														<span><a href="#">My Wishlist</a></span>
 														<span><a href="#">Sign In</a></span>
@@ -301,9 +237,9 @@
 										<li><a href="team.html">Team Page</a></li>
 									</ul>
 								</li>
-								<li><a href="shop-grid.html">Shop</a>
+								<li><a th:href="@{/shop-grid}">Shop</a>
 									<ul>
-										<li><a href="shop-grid.html">Shop Grid</a></li>
+										<li><a th:href="@{/shop-grid}">Shop Grid</a></li>
 										<li><a href="single-product.html">Single Product</a></li>
 									</ul>
 								</li>

@@ -2,7 +2,6 @@ package com.caotrinh.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,12 +10,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.domain.Page;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.caotrinh.dto.ProductDTO;
 import com.caotrinh.entities.Book;
-import com.caotrinh.entities.Category;
 import com.caotrinh.service.ProductService;
 
 @Controller
@@ -41,40 +35,25 @@ public class ProductController {
 
 	@RequestMapping("/list")
 	public String showList(Model model) {
-		return listByPage(model, 1);
-	}
-
-	@GetMapping("/list/page/{pageNum}")
-	public String listByPage(Model model, @PathVariable("pageNum") int pageNum) {
-		Page<Book> page = productService.listAll(pageNum);
-		List<Book> listProduct = page.getContent();
-		long totalItems = page.getTotalElements();
-		int totalPages = page.getTotalPages();
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("totalItems", totalItems);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("PRODUCTS", listProduct);
+		model.addAttribute("PRODUCTS", productService.findAll());
 		return "view-product";
-
 	}
 
-	@GetMapping("/add")
-	public String showAddOrEditForm(ModelMap model) {
+	@GetMapping("/")
+	public String addOrEdit(ModelMap model) {
 		ProductDTO dto = new ProductDTO();
 		model.addAttribute("PRODUCTDTO", dto);
 		model.addAttribute("ACTION", "/product/saveOrUpdate");
-		return "addProduct";
+		return "add-product";
 
 	}
 
 	@PostMapping("/saveOrUpdate")
-	public String save(ModelMap model, @ModelAttribute("PRODUCTDTO") ProductDTO dto) throws IOException {
+	public String save(ModelMap model, @ModelAttribute("PRODUCTDTO") ProductDTO dto) {
 		Optional<Book> optional = productService.findById(dto.getId());
 		Book book = null;
-		String image = "/images/books/leather-book-preview.png";
-		File file = new ClassPathResource("static/images/books").getFile();
-		String canonicalPath = file.getCanonicalPath();
-		Path path = Paths.get(canonicalPath);
+		String image = "book-preview.png";
+		Path path = Paths.get("uploads/");
 		if (optional.isPresent()) {
 			// update
 			if (dto.getImage().isEmpty()) {
@@ -84,7 +63,7 @@ public class ProductController {
 					InputStream inputStream = dto.getImage().getInputStream();
 					Files.copy(inputStream, path.resolve(dto.getImage().getOriginalFilename()),
 							StandardCopyOption.REPLACE_EXISTING);
-					image = "/images/books/" + dto.getImage().getOriginalFilename().toString();
+					image = dto.getImage().getOriginalFilename().toString();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -96,57 +75,53 @@ public class ProductController {
 					InputStream inputStream = dto.getImage().getInputStream();
 					Files.copy(inputStream, path.resolve(dto.getImage().getOriginalFilename()),
 							StandardCopyOption.REPLACE_EXISTING);
-					image = "/images/books/" + dto.getImage().getOriginalFilename().toString();
+					image = dto.getImage().getOriginalFilename().toString();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		book = new Book(dto.getId(), new Category(dto.getCategory(), ""), dto.getName(), dto.getPrice(), image);
+		book.setCategory(dto.getCategory());
+		book.setName(dto.getName());
+		book.setPrice(dto.getPrice());
+		book.setImage(dto.getImage().getName());
 		productService.save(book);
-		showList((Model) model);
-		return "redirect:/product/list";
+		return "add-product";
 
 	}
 
 	@RequestMapping("/edit/{id}")
-	public String edit(ModelMap model, @PathVariable(name = "id") int id, HttpServletRequest request)
-			throws IOException {
+	public String edit(ModelMap model, @PathVariable(name = "id") int id) {
 		Optional<Book> optional = productService.findById(id);
-		ProductDTO productDTO = null;
+		ProductDTO dto = null;
 		if (optional.isPresent()) {
 			Book book = optional.get();
-			File file = new ClassPathResource("static" + book.getImage()).getFile();
+			File file = new File("uploads/", book.getImage());
 			try {
 				FileInputStream input = new FileInputStream(file);
 				MultipartFile multiImage = new MockMultipartFile("file", file.getName(), "text/plan",
 						IOUtils.toByteArray(input));
-				productDTO = new ProductDTO(book.getId(), book.getCategory().getId(), book.getName(), book.getPrice(),
+				dto = new ProductDTO(book.getId(), book.getCategory(), book.getName(), book.getPrice(),
 						multiImage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			model.addAttribute("PRODUCTDTO", productDTO);
+			model.addAttribute("PRODUCTDTO", dto);
 		} else {
 			model.addAttribute("PRODUCTDTO", new ProductDTO());
 		}
 		model.addAttribute("ACTION", "/product/saveOrUpdate");
-		return "addProduct";
+		return "add-product";
 
 	}
-
+	
 	@RequestMapping("/delete/{id}")
 	public String delete(ModelMap model, @PathVariable(name = "id") int id) {
 		productService.deleteById(id);
-		showList((Model) model);
+		model.addAttribute("PRODUCTS", productService.findAll());
 		return "view-product";
 
 	}
 
-	@ModelAttribute(name = "CATEGORY")
-	public List<Category> getCategory() {
-		return productService.findAllCategory();
-
-	}
 
 }

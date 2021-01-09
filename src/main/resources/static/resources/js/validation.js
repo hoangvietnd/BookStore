@@ -3,7 +3,7 @@ var statusName, statusPassword, statusAddress;
 $(document).ready(function () {
 	$("#cname").blur(function () {
         var value = $(this).val();
-        if (value === ''){
+        if (value == ''){
             $("#error-name").html("Vui lòng nhập tên người dùng");
         }
         $.ajax({
@@ -26,7 +26,7 @@ $(document).ready(function () {
 	
 	$("#cpassword").blur(function () {
         var value = $(this).val();
-        if (value === ''){
+        if (value == ''){
             $("#error-password").html("Vui lòng nhập mật khẩu");
         }else if(value.length < 6){
         	$("#error-password").html("Mật khẩu phải lớn hơn 6 kí tự");
@@ -46,12 +46,11 @@ $(document).ready(function () {
 	
 	$("#cyearOfBirth").blur(function () {
         var value = $(this).val();
-        var regex=/^[0-9]+$/;
         var today = new Date();
         var currentYear = today.getFullYear();
         var age = currentYear - parseInt(value);
         console.log("Age : "+age);
-        if (value === ''){
+        if (value == ''){
             $("#error-yearOfBirth").html("Vui lòng nhập đầy đủ năm sinh");
         } else if(age < 18){
         	$("#error-yearOfBirth").html("Người đăng ký phải lớn hơn 18 tuổi");
@@ -62,10 +61,9 @@ $(document).ready(function () {
 	
 	$("#cphone").blur(function () {
         var value = $(this).val();
-        var regex=/^[0-9]+$/;
-        if (value === ''){
+        if (value == ''){
             $("#error-phone").html("Vui lòng nhập đầy đủ số điện thoại người dùng");
-        } else if(value.length < 10 && value.length > 12){
+        } else if(value.length < 10 || value.length > 12){
         	$("#error-phone").html("Độ dài số điện thoại của bạn không hợp lệ");
         }else{
         	$("#error-phone").html("");
@@ -74,7 +72,7 @@ $(document).ready(function () {
 	
 	$("#cemail").blur(function () {
         var value = $(this).val();
-        if (value === ''){
+        if (value == ''){
             $("#error-email").html("Vui lòng nhập đầy đủ email người dùng");
         }else{
         	$("#error-email").html("");
