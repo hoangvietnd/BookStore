@@ -124,7 +124,7 @@ public class MainController {
 		} else {
 			customerService.saveCustomer(customer);
 			model.addAttribute("listBook", bookService.pagination(0));
-			return "index";
+			return "login";
 		}
 	}
 

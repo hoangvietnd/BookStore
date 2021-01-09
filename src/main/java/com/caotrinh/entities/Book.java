@@ -25,6 +25,16 @@ public class Book {
 	public Book() {
 		super();
 	}
+	
+
+	public Book(String category, String name, double price, String image) {
+		super();
+		this.category = category;
+		this.name = name;
+		this.price = price;
+		this.image = image;
+	}
+
 
 	public int getId() {
 		return id;

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.caotrinh.entities.AuthenticationProvider;
 import com.caotrinh.entities.Customer;
 import com.caotrinh.repository.CustomerRepository;
 
@@ -35,5 +36,26 @@ public class CustomerService implements UserDetailsService {
         if (user == null) throw new UsernameNotFoundException(username);
         return new CustomerDetail(user);
 	}
+	public Customer getCustomerByEmail(String email) {
+		return customerRepository.findByEmail(email);
+
+	}
+
+	public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider) {
+		Customer customer = new Customer();
+		customer.setEmail(email);
+		customer.setName(name);
+		customer.setProvider(provider);
+		customerRepository.save(customer);
+		
+	}
+
+	public void updateCustomerAfterOAuthLoginSuccess(Customer customer, String name, AuthenticationProvider provider) {
+		customer.setName(name);
+		customer.setProvider(provider);
+		customerRepository.save(customer);
+		
+	}
+
 	
 }
