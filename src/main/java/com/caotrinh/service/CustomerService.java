@@ -43,6 +43,7 @@ public class CustomerService implements UserDetailsService {
 
 	public void createNewCustomerAfterOAuthLoginSuccess(String email, String name, AuthenticationProvider provider) {
 		Customer customer = new Customer();
+
 		customer.setUsername(email);
 		customer.setEmail(email);
 		customer.setName(name);
