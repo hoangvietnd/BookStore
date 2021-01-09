@@ -21,10 +21,6 @@
 				<form th:action="${ACTION}" th:object="${PRODUCTDTO}" method="post"
 					enctype="multipart/form-data">
 					<div class="form-group">
-						<label>Product ID</label> 
-						<input type="text" th:field="*{id}" class="form-control" name="id" placeholder="Enter id" id="id" value="">
-					</div>
-					<div class="form-group">
 						<label>Name</label> 
 						<input type="text" th:field="*{name}" class="form-control" name="name" placeholder="Enter name" id="name" value="">
 						<span id="username_message"></span>
@@ -32,11 +28,7 @@
 					</div>
 					<div class="form-group">
 						<label>Category</label> 
-						<select th:field="*{category}" class="form-control" id="category" name="category">
-							<option th:each="category: ${CATEGORY}" th:value="${category.id}"
-								th:text="${category.name}">Biography</option>
-
-						</select>
+						<input type="text" th:field="*{category}" class="form-control" name="category" placeholder="Enter category" id="category" value="">
 					</div>
 					<div class="form-group">
 						<label>Image</label>

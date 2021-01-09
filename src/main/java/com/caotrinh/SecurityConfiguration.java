@@ -8,10 +8,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.caotrinh.oauth.OAuth2LoginSuccessHandler;
+import com.caotrinh.service.CustomOAuth2UserService;
 import com.caotrinh.service.CustomerService;
 
 @EnableWebSecurity
@@ -21,10 +22,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private CustomOAuth2UserService customOAuth2UserService;
+	
+	@Autowired
+	private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http .authorizeRequests()
+			.antMatchers("/oauth2/**").permitAll()
 			.antMatchers("/admin/**").hasAuthority("admin")
 			.antMatchers("/user/**").hasAuthority("user")
             .antMatchers(
@@ -37,6 +45,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .formLogin()
             .loginPage("/login")
             .permitAll()
+            .and()
+            .oauth2Login()
+            	.loginPage("/login")
+            	.userInfoEndpoint().userService(customOAuth2UserService)
+            	.and()
+            	.successHandler(oAuth2LoginSuccessHandler)
             .and()
             .logout()
             .invalidateHttpSession(true)

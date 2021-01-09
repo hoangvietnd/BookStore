@@ -46,6 +46,7 @@ public class CustomerService implements UserDetailsService {
 		customer.setEmail(email);
 		customer.setName(name);
 		customer.setProvider(provider);
+		customer.setRole("user");
 		customerRepository.save(customer);
 		
 	}
@@ -53,6 +54,7 @@ public class CustomerService implements UserDetailsService {
 	public void updateCustomerAfterOAuthLoginSuccess(Customer customer, String name, AuthenticationProvider provider) {
 		customer.setName(name);
 		customer.setProvider(provider);
+		//customer.setRole("user");
 		customerRepository.save(customer);
 		
 	}

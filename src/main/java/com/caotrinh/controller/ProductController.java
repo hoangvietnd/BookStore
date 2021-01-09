@@ -33,7 +33,7 @@ import com.caotrinh.entities.Book;
 import com.caotrinh.service.ProductService;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/admin")
 public class ProductController {
 	@Autowired
 	ProductService productService;
@@ -61,7 +61,7 @@ public class ProductController {
 	public String showAddOrEditForm(ModelMap model) {
 		ProductDTO dto = new ProductDTO();
 		model.addAttribute("PRODUCTDTO", dto);
-		model.addAttribute("ACTION", "/product/saveOrUpdate");
+		model.addAttribute("ACTION", "/admin/saveOrUpdate");
 		return "addProduct";
 
 	}
@@ -104,7 +104,7 @@ public class ProductController {
 		book = new Book(dto.getCategory(), dto.getName(), dto.getPrice(), image);
 		productService.save(book);
 		showList((Model) model);
-		return "redirect:/product/list";
+		return "redirect:/admin/list";
 
 	}
 
@@ -129,7 +129,7 @@ public class ProductController {
 		} else {
 			model.addAttribute("PRODUCTDTO", new ProductDTO());
 		}
-		model.addAttribute("ACTION", "/product/saveOrUpdate");
+		model.addAttribute("ACTION", "/admin/saveOrUpdate");
 		return "addProduct";
 
 	}
