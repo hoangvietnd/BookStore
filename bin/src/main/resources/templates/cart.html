@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cart Page</title>
+</head>
+<body>
+	<div th:insert="~{link :: links}"></div>
+	<div th:insert="~{header :: header}"></div>
+	
+	<div class="cart-main-area section-padding--lg bg--white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 ol-lg-12">
+                        <form action="#">               
+                            <div class="table-content wnro__table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr class="title-top">
+                                            <th class="product-thumbnail">Image</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product-quantity">Quantity</th>
+                                            <th class="product-remove">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:each="book : ${books}">
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img th:src="@{${book.item.image}}" width="80" height="100"></a></td>
+                                            <td class="product-name"><a href="#" th:text="${book.item.name}"></a></td>
+                                            <td class="product-price"><span class="amount" th:text="${book.item.price}"></span></td>
+                                            <td class="product-quantity"><input type="number" th:value="${book.quantity}" class="quantity" th:id="${book.item.id}"></td>
+                                            <td class="product-remove"><a th:href="@{'/removeCart/'+${book.item.id}}">X</a></td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form> 
+                        <div class="cartbox__btn">
+                            <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                <li><a href="#">Coupon Code</a></li>
+                                <li><a href="#">Apply Code</a></li>
+                                <li><a th:href="@{/checkout}">Check Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-6">
+                        <div class="cartbox__total__area">
+                            <div class="cartbox-total d-flex justify-content-between">
+                                <ul class="cart__total__list">
+                                    <li>Cart total</li>
+                                </ul>
+                                <ul class="cart__total__tk">
+                                    <li class="cart-total" th:text="${total}"></li>
+                                </ul>
+                            </div>
+                            <div class="cart__total__amount">
+                                <span>Grand Total</span>
+                                <span class="cart-total" th:text="${total}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+	
+	<div th:insert="~{footer :: footer}"></div>
+</body>
+	<script th:src="@{/resources/js/vendor/modernizr-3.5.0.min.js}"></script>
+	<script th:src="@{/resources/js/vendor/jquery-3.2.1.min.js}" ></script>
+	<script th:src="@{/resources/js/popper.min.js}" ></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}" ></script>
+	<script th:src="@{/resources/js/plugins.js}"></script>
+	<script th:src="@{/resources/js/active.js}"></script>
+	<script th:src="@{/resources/js/ajax.js}"></script>
+</html>

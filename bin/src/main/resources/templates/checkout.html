@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Check Out</title>
+</head>
+<body>
+<div th:insert="~{link :: links}"></div>
+<div th:insert="~{header :: header}"></div>
+	<section class="wn__checkout__area section-padding--lg bg__white">
+        	<div class="container">
+        		<div class="row">
+        			<div class="col-lg-6 col-12">
+        				<div class="customer_details">
+        					<h3>Billing details</h3>
+        					<div class="customar__field">
+        						<div class="input_box">
+        							<label>Name <span>*</span></label>
+        							<input type="text" th:value="${customer.name}">
+								</div>
+        						<div class="input_box">
+        							<label>Address <span>*</span></label>
+        							<input type="text" th:value="${customer.address}">
+        						</div>
+								<div class="input_box">
+									<label>Email <span>*</span></label>
+									<input type="email" th:value="${customer.email}">
+								</div>
+								<div class="margin_between">
+									<div class="input_box space_between">
+										<label>Phone <span>*</span></label>
+										<input type="text" th:value="${customer.phone}">
+									</div>
+
+									<div class="input_box space_between">
+										<label>Year Of Birth <span>*</span></label>
+										<input type="email" th:value="${customer.yearOfBirth}">
+									</div>
+								</div>
+								<div class="cartbox__btn">
+		                            <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+		                                <li><a th:href="@{/checkout}">Update</a></li>
+		                                <li><a th:href="@{/saveOrder}">Check Out</a></li>
+		                            </ul>
+                       			 </div>
+        					</div>
+        				</div>
+        			</div>
+        			<div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
+        				<div class="wn__order__box">
+        					<h3 class="onder__title">Your order</h3>
+        					
+        					<table class="table table-hover">
+						    <thead>
+						      <tr>
+						        <th>Product</th>
+						        <th>Price</th>
+						        <th>Quantity</th>
+						      </tr>
+						    </thead>
+						    <tbody th:each="book : ${books}">
+						      <tr>
+						        <td th:text="${book.item.name}"></td>
+						        <td th:text="${book.item.price}"></td>
+						        <td th:text="${book.quantity}"></td>
+						      </tr>
+						    </tbody>
+						  </table>
+						  <ul class="total__amount">
+        						<li>Order Total <span th:text = "${total}"></span></li>
+        					</ul>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </section>
+        <div th:insert="~{footer :: footer}"></div>
+</body>
+	<!-- //Main wrapper -->
+	<script th:src="@{/resources/js/vendor/modernizr-3.5.0.min.js}"></script>
+	<script th:src="@{/resources/js/vendor/jquery-3.2.1.min.js}" ></script>
+	<script th:src="@{/resources/js/popper.min.js}" ></script>
+	<script th:src="@{/resources/js/bootstrap.min.js}" ></script>
+	<script th:src="@{/resources/js/plugins.js}"></script>
+	<script th:src="@{/resources/js/active.js}"></script>
+	<script th:src="@{/resources/js/ajax.js}"></script>
+</html>

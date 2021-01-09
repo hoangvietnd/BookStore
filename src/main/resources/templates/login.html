@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/resources/css/mystyle.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container">
+		<div class="text-center"><h1>Login with Manually or Social Media</h1></div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                
+                <form th:action="@{/login}" method="post">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Invalid username or password.
+                        </div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">You have been logged out.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>: <input type="text" id="username" name="username" class="form-control" autofocus="autofocus" placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>: <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit" name="login-submit" id="login-submit" class="form-control btn btn-primary" value="Log In" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span>New user? <a href="/" th:href="@{/addCustomerForm}">Register here</a></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 col-md-offset-3">
+				<div class="text-center">
+					<span>OR</span>
+				</div>
+				<div>
+					<a th:href="@{/oauth2/authorization/facebook}" class="fb btn">
+						<i class="fa fa-facebook fa-fw"></i> Login with Facebook
+					</a>
+				</div>  
+				<div>
+					<a th:href="@{/oauth2/authorization/google}" class="google btn">
+						<i class="fa fa-google fa-fw"></i> Login with Google
+					</a>
+				</div>
+			</div>
+        </div>
+    </div>
+</body>
+</html>
