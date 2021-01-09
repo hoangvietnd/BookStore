@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.caotrinh.repository.CategoryRepository;
 
 @Service
 public class ProductService {
+
 	@Autowired
 	private BookRepository bookRepository;
 
@@ -39,7 +41,8 @@ public class ProductService {
 		return bookRepository.findOne(example);
 	}
 
-	public Page<Book> findAll(Pageable pageable) {
+	public Page<Book> listAll(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
 		return bookRepository.findAll(pageable);
 	}
 

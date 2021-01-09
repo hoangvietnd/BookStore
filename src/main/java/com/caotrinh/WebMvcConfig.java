@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-
 
 	@Bean(name = "localeResolver")
 	public LocaleResolver getLocaleResolver() {
@@ -41,13 +39,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		localeChangeInterceptor.setParamName("language");
 		registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
 	}
-	
+
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/403").setViewName("403");
 		registry.addViewController("/").setViewName("index");
-        registry.addViewController("/login").setViewName("login");
-        //registry.addViewController("/home").setViewName("userhome");
-        registry.addViewController("/user/home").setViewName("user");
+		registry.addViewController("/login").setViewName("login");
+		// registry.addViewController("/home").setViewName("userhome");
+		registry.addViewController("/user/home").setViewName("user");
 	}
+
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		Path imageUpploadDir = Paths.get("./images/books");
+//		String imageUploadPath = imageUpploadDir.toFile().getAbsolutePath();
+//		registry.addResourceHandler("./images/books/**").addResourceLocations("file:/" + imageUploadPath + "/");
+//	}
+
 }
