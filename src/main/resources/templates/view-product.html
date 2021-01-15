@@ -11,6 +11,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+	<!-- Nav Bar -->
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  <!-- Brand -->
+	  <a class="navbar-brand" th:href="@{/index}">Book Store</a>
+	
+	  <!-- Links -->
+	  <ul class="navbar-nav">
+	    <li class="nav-item">
+	      <a class="nav-link" th:href="@{/index}">Home</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" th:href="@{/shop-grid}">Shop Grid</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" th:href="@{/admin/list}">Manage Product</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="@{/contact}">Contact</a>
+	    </li>
+	  </ul>
+	</nav>
+	<br>
 	<div class="container">
 		<div>
 			<h2>MANAGER PRODUCTS</h2>
@@ -41,10 +63,10 @@
 							width="80" height="100"></td>
 						<td th:text="${item.price}"></td>
 						<td><a class="btn btn-success btn-sm"
-							th:href="@{'/product/edit/'+${item.id}}"><i
+							th:href="@{'/admin/edit/'+${item.id}}"><i
 								class="far fa-edit"></i> Edit</a> &nbsp; 
 							<a class="btn btn-danger btn-sm"
-							th:href="@{'/product/delete/'+${item.id}}"><i
+							th:href="@{'/admin/delete/'+${item.id}}"><i
 								class="fas fa-trash-alt"></i> Delete</a>
 						</td>
 					</tr>
