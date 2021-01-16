@@ -1,11 +1,7 @@
-var statusName, statusPassword, statusAddress;
 
 $(document).ready(function () {
 	$("#cname").blur(function () {
         var value = $(this).val();
-        if (value == ''){
-            $("#error-name").html("Vui lòng nhập tên người dùng");
-        }
         $.ajax({
             method: 'GET',
             url: 'checkUserName',
@@ -17,9 +13,11 @@ $(document).ready(function () {
         }).done(function (data) {
         	console.log(data)
 	        if(data == "true"){
-	        	$("#error-name").html("Tên người dùng này đã tồn tại, xin thử lại tên khác");
+	        	$("#error-name").text("Tên người dùng này đã tồn tại, xin thử lại tên khác");
+	        }else if (value == ''){
+	            $("#error-name").text("Vui lòng nhập tên người dùng");
 	        }else{
-	        	$("#error-name").html("");
+	        	$("#error-name").text("");
 	        }
         });
     });
@@ -27,20 +25,20 @@ $(document).ready(function () {
 	$("#cpassword").blur(function () {
         var value = $(this).val();
         if (value == ''){
-            $("#error-password").html("Vui lòng nhập mật khẩu");
+            $("#error-password").text("Vui lòng nhập mật khẩu");
         }else if(value.length < 6){
-        	$("#error-password").html("Mật khẩu phải lớn hơn 6 kí tự");
+        	$("#error-password").text("Mật khẩu phải lớn hơn 6 kí tự");
         }else{
-        	$("#error-password").html("");
+        	$("#error-password").text("");
         }
     });
 	
 	$("#caddress").blur(function () {
         var value = $(this).val();
         if (value === ''){
-            $("#error-address").html("Vui lòng nhập đầy đủ địa chỉ");
+            $("#error-address").text("Vui lòng nhập đầy đủ địa chỉ");
         }else{
-        	$("#error-address").html("");
+        	$("#error-address").text("");
         }
     });
 	
@@ -51,29 +49,29 @@ $(document).ready(function () {
         var age = currentYear - parseInt(value);
         console.log("Age : "+age);
         if (value == ''){
-            $("#error-yearOfBirth").html("Vui lòng nhập đầy đủ năm sinh");
+            $("#error-yearOfBirth").text("Vui lòng nhập đầy đủ năm sinh");
         } else if(age < 18){
-        	$("#error-yearOfBirth").html("Người đăng ký phải lớn hơn 18 tuổi");
+        	$("#error-yearOfBirth").text("Người đăng ký phải lớn hơn 18 tuổi");
         } else{
-        	$("#error-yearOfBirth").html("")
+        	$("#error-yearOfBirth").text("");
         }
     });
 	
 	$("#cphone").blur(function () {
         var value = $(this).val();
         if (value == ''){
-            $("#error-phone").html("Vui lòng nhập đầy đủ số điện thoại người dùng");
+            $("#error-phone").text("Vui lòng nhập đầy đủ số điện thoại người dùng");
         } else if(value.length < 10 || value.length > 12){
-        	$("#error-phone").html("Độ dài số điện thoại của bạn không hợp lệ");
+        	$("#error-phone").text("Độ dài số điện thoại của bạn không hợp lệ");
         }else{
-        	$("#error-phone").html("");
+        	$("#error-phone").text("");
         }
     });
 	
 	$("#cemail").blur(function () {
         var value = $(this).val();
         if (value == ''){
-            $("#error-email").html("Vui lòng nhập đầy đủ email người dùng");
+            $("#error-email").text("Vui lòng nhập đầy đủ email người dùng");
         }else{
         	$("#error-email").html("");
         }

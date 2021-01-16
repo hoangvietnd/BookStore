@@ -18,24 +18,36 @@
 					<div class="col-lg-6 col-12">
 						<div class="my__account__wrapper">
 							<h3 class="account__title">Login</h3>
-							<form action="#">
+							<form th:action="@{/login}" method="post">
+							<div th:if="${param.error}">
+                        		<div class="alert alert-danger">Invalid username or password.</div>
+                   			</div>
+		                    <div th:if="${param.logout}">
+		                        <div class="alert alert-info">You have been logged out.</div>
+		                    </div>
 								<div class="account__form">
 									<div class="input__box">
 										<label>Username or email address <span>*</span></label>
-										<input type="text">
+										<input type="text" id="username" name="username">
 									</div>
 									<div class="input__box">
 										<label>Password<span>*</span></label>
-										<input type="text">
+										<input type="text" id="password" name="password">
 									</div>
 									<div class="form__btn">
-										<button>Login</button>
+										<button type="submit">Login</button>
 										<label class="label-for-checkbox">
 											<input id="rememberme" class="input-checkbox" name="rememberme" value="forever" type="checkbox">
 											<span>Remember me</span>
 										</label>
 									</div>
 									<a class="forget_pass" href="#">Lost your password?</a>
+									<a th:href="@{/oauth2/authorization/facebook}" class="fb btn">
+										<i class="fa fa-facebook fa-fw"></i> Login with Facebook
+									</a>
+									<a th:href="@{/oauth2/authorization/google}" class="google btn">
+										<i class="fa fa-google fa-fw"></i> Login with Google
+									</a>
 								</div>
 							</form>
 						</div>
@@ -86,7 +98,7 @@
 								        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 									</div>
 									<div class="form__btn">
-										<button>Đăng ký</button>
+										<button id = "registerCustomer">Đăng ký</button>
 									</div>
 								</div>
 							</form>

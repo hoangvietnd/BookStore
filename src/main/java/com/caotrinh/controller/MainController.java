@@ -215,5 +215,5 @@ public class MainController {
 		model.addAttribute("customer", new Customer());
 		return "myaccount";
 	}
-
+	
 }
