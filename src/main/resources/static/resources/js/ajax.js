@@ -42,58 +42,8 @@ function displayBook(book) {
     $('#page1').html(s);
 }
 
-function displayCart(items1) {
-    var s = '';
-    s += '<div class="minicart-content-wrapper">'
-    s += '<div class="micart__close"><span>close</span></div>'
-    s += '<div class="items-total d-flex justify-content-between">'
-    s += '<span>' + items1.numberOfItems + ' items</span>'
-    s += '	<span>Cart Subtotal</span></div>'
-    s += '<div class="total_amount text-right">'
-    s += '<span>$' + items1.total + '</span>'
-    s += '</div>'
-    s += '<div class="mini_action checkout">'
-    s += '<a class="checkout__btn" href="cart.html">Go to Checkout</a>'
-    s += '</div>'
-    s += '</div>'	
-    console.log(s);
-    $('.block-minicart minicart_active').html(s);
-}
 $(document).ready(function () {
-    //shopping cart
-    $('.addCart').click(function () {
-        var value = this.id;
-        console.log(value);
-        $.ajax({
-            method: 'GET',
-            url: 'addCart',
-            dataType: 'json',
-            cache: false,
-            data: {
-                id: value,
-            }
-        }).done(function (items1) {
-        	alert('Đã thêm vào giỏ hàng');
-        	console.log(items1)
-        });
-    });
-    
-    $('.removeCart').click(function () {
-        var value = this.id;
-        console.log(value);
-        $.ajax({
-            method: 'GET',
-            url: 'removeCart',
-            dataType: 'json',
-            cache: false,
-            data: {
-                id: value,
-            }
-        }).done(function (items1) {
-        	console.log(items1)
-        });
-    });
-
+	//pagination
     $('#page1, #page2, #page3, #page4, #page5, #page6').on('click', function () {
         var value = $(this).text();
         $.ajax({
@@ -108,7 +58,8 @@ $(document).ready(function () {
             displayBook(data.content);
         });
     });
-
+    
+    //filter by price
     $('#filter').on('click', function () {
         var value = $('#amount').val().trim();
         var res = value.split("-");
@@ -127,10 +78,12 @@ $(document).ready(function () {
                 price2: price2
             }
         }).done(function (book) {
+        	$( ".wn__pagination" ).hide();
             displayBook(book);
         });
     });
 
+    //quick view
     $('.quickview').on('click', function () {
         var value = this.id;
         console.log(value);
@@ -153,6 +106,7 @@ $(document).ready(function () {
         });
     });
     
+    //auto complete search
     $('#search').keyup(function() {
         var name = $('#search').val();
     		$.ajax({
@@ -178,7 +132,8 @@ $(document).ready(function () {
                 $("#autoCompleteSearch").html(s);
            });    
     });
- 
+    
+    //update cart items quantity
     $('.quantity').blur(function() {
         var newQuantity = $('.quantity').val();
         var id = this.id;
