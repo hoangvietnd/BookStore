@@ -12,11 +12,13 @@
 	<groupId>com.caotrinh</groupId>
 	<artifactId>BookStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>BookStore</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>com.caotrinh.BookStoreApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -73,9 +75,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
+	<finalName>bookstore</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
