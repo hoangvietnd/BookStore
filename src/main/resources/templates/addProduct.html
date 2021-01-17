@@ -45,8 +45,6 @@
 					<div class="form-group">
 						<label>Name</label> 
 						<input type="text" th:field="*{name}" class="form-control" name="name" placeholder="Enter name" id="name" value="">
-						<span id="username_message"></span>
-						
 					</div>
 					<div class="form-group">
 						<label>Category</label> 
@@ -65,15 +63,21 @@
 						<button type="submit" class="btn btn-primary">
 							<i class="far fa-save"></i> Save
 						</button>
-						<button type="reset" class="btn btn-danger">
+						<button type="reset" class="btn btn-danger" onclick="cancel()">
 							<i class="far fa-window-close"></i> Cancel
 						</button>
 						<a class="btn btn-success" href="/admin/list"><i
-							class="far fa-list-alt"></i> Display List Product</a>
+							class="far fa-list-alt"></i> Display List Product
+						</a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	function cancel(){
+		window.location = '/admin/list';
+	}
+</script>
 </body>
 </html>

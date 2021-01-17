@@ -34,14 +34,29 @@
 	</nav>
 	<br>
 	<div class="container">
-		<div>
-			<h2>MANAGER PRODUCTS</h2>
-			<p>
-				<a class="btn btn-primary" href="/admin/add">
-					<i class="far fa-plus-square"></i> ADD PRODUCT
-				</a>
-			</p>
-		</div>
+		
+			<div>
+				<h2>MANAGER PRODUCTS</h2>
+				<div class="row">
+					<div class="col-7">
+						<p>
+						<a class="btn btn-primary" href="/admin/add"> 
+							<i class="far fa-plus-square"></i> ADD PRODUCT
+						</a>
+						</p>
+					</div>
+					<div class="col-5 search d-flex justify-content-end">
+						<form th:action="@{/admin/list/page/1}" class="form-inline">
+							<input type="text" class="form-control mr-sm-2" name="keyword" th:value="${keyword}" placeholder="keyword">
+							<button  type="submit" class="btn btn-primary">Search</button> &nbsp;
+							<button type="button" class="btn btn-warning" onclick="clearSearch()">Delete</button> &nbsp;
+						</form>
+					</div>
+					
+				</div>
+				
+			</div>
+		
 		<div>
 			<table class="table table-bordered">
 				<thead class="thead-dark">
@@ -77,24 +92,29 @@
 		<div class="text-center">
 			Total items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
 			&nbsp; - &nbsp;
-			<a th:if="${currentPage > 1}" th:href="@{/admin/list/page/1}">First</a>
+			<a th:if="${currentPage > 1}" th:href="@{/admin/list/page/1 + ${keyword != null ? '?keyword=' + keyword : ''}}">First</a>
 			<span th:unless="${currentPage > 1}">First</span>
 			&nbsp;&nbsp;
-			<a th:if="${currentPage > 1}" th:href="@{'/admin/list/page/' + ${currentPage - 1}}">Previous</a>
+			<a th:if="${currentPage > 1}" th:href="@{'/admin/list/page/' + ${currentPage - 1} + ${keyword != null ? '?keyword=' + keyword : ''}}">Previous</a>
 			<span th:unless="${currentPage > 1}">Previous</span>
 			&nbsp;&nbsp;			
 			<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-				<a th:if="${i != currentPage}" th:href="@{'/admin/list/page/' + ${i}}">[[${i}]]</a>
+				<a th:if="${i != currentPage}" th:href="@{'/admin/list/page/' + ${i} + ${keyword != null ? '?keyword=' + keyword : ''}}">[[${i}]]</a>
 				<span th:unless="${i != currentPage}">[[${i}]]</span>
 				&nbsp;&nbsp;
 			</span>			
-			<a th:if="${currentPage < totalPages}" th:href="@{'/admin/list/page/' + ${currentPage + 1}}">Next</a>
+			<a th:if="${currentPage < totalPages}" th:href="@{'/admin/list/page/' + ${currentPage + 1} + ${keyword != null ? '?keyword=' + keyword : ''}}">Next</a>
 			<span th:unless="${currentPage < totalPages}">Next</span>
 			&nbsp;&nbsp;
-			<a th:if="${currentPage < totalPages}" th:href="@{'/admin/list/page/' + ${totalPages}}">Last</a>
+			<a th:if="${currentPage < totalPages}" th:href="@{'/admin/list/page/' + ${totalPages} + ${keyword != null ? '?keyword=' + keyword : ''}}">Last</a>
 			<span th:unless="${currentPage < totalPages}">Last</span>
 			&nbsp;&nbsp;
 		</div>
 	</div>
+<script type="text/javascript">
+	function clearSearch(){
+		window.location = '/admin/list';
+	}
+</script>
 </body>
 </html>

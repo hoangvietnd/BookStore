@@ -17,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,18 +41,20 @@ public class ProductController {
 
 	@RequestMapping("/list")
 	public String showList(Model model) {
-		return listByPage(model, 1);
+		String keyword = null;
+		return listByPage(model, 1, keyword);
 	}
 
 	@GetMapping("/list/page/{pageNum}")
-	public String listByPage(Model model, @PathVariable("pageNum") int pageNum) {
-		Page<Book> page = productService.listAll(pageNum);
+	public String listByPage(Model model, @PathVariable("pageNum") int pageNum, @Param("keyword") String keyword) {
+		Page<Book> page = productService.listAll(pageNum, keyword);
 		List<Book> listProduct = page.getContent();
 		long totalItems = page.getTotalElements();
 		int totalPages = page.getTotalPages();
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalItems", totalItems);
 		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("PRODUCTS", listProduct);
 		return "view-product";
 
@@ -141,11 +144,5 @@ public class ProductController {
 		return "view-product";
 
 	}
-
-//	@ModelAttribute(name = "CATEGORY")
-//	public List<Category> getCategory() {
-//		return productService.findAllCategory();
-//
-//	}
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Book {
@@ -16,8 +17,9 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-	
+
 	private String category;
+	@Size(min = 3, max = 50)
 	private String name;
 	private double price;
 	private String image;
@@ -25,7 +27,6 @@ public class Book {
 	public Book() {
 		super();
 	}
-	
 
 	public Book(String category, String name, double price, String image) {
 		super();
@@ -34,7 +35,6 @@ public class Book {
 		this.price = price;
 		this.image = image;
 	}
-
 
 	public int getId() {
 		return id;

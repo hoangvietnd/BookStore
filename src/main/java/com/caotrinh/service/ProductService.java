@@ -31,8 +31,11 @@ public class ProductService {
 		return bookRepository.findOne(example);
 	}
 
-	public Page<Book> listAll(int pageNumber) {
+	public Page<Book> listAll(int pageNumber, String keyword) {
 		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+		if (keyword != null) {
+			return bookRepository.findAll(keyword, pageable);
+		}
 		return bookRepository.findAll(pageable);
 	}
 

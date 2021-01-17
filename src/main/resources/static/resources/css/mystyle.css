@@ -1,3 +1,7 @@
+h2 {
+	text-align: center;
+}
+
 th {
 	text-align: center;
 }
@@ -10,7 +14,7 @@ td {
 	margin-left: 80px;
 }
 
-input, .btn {
+input, .btn1 {
 	width: 100%;
 	padding: 12px;
 	border: none;
@@ -23,7 +27,7 @@ input, .btn {
 	text-decoration: none; /* remove underline from anchors */
 }
 
-input:hover, .btn:hover {
+input:hover, .btn1:hover {
 	opacity: 1;
 }
 
@@ -35,4 +39,8 @@ input:hover, .btn:hover {
 .google {
 	background-color: #dd4b39;
 	color: white;
+}
+
+.search {
+	margin-bottom: 16px;
 }
