@@ -47,9 +47,9 @@
 					</div>
 					<div class="col-5 search d-flex justify-content-end">
 						<form th:action="@{/admin/list/page/1}" class="form-inline">
-							<input type="text" class="form-control mr-sm-2" name="keyword" th:value="${keyword}" placeholder="keyword">
-							<button  type="submit" class="btn btn-primary">Search</button> &nbsp;
-							<button type="button" class="btn btn-warning" onclick="clearSearch()">Delete</button> &nbsp;
+							<input type="text" class="form-control border border-secondary mr-sm-2" name="keyword" th:value="${keyword}" placeholder="Enter keyword">
+							<button  type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button> &nbsp;
+							<button type="button" class="btn btn-warning" onclick="clearSearch()"><i class="fas fa-undo"></i> Clear</button> &nbsp;
 						</form>
 					</div>
 					
@@ -77,15 +77,15 @@
 						<td width="200"><img alt="" th:src="@{${item.image}}"
 							width="80" height="100"></td>
 						<td th:text="${item.price}"></td>
-						<td><a class="btn btn-success btn-sm"
-							th:href="@{'/admin/edit/'+${item.id}}"><i
-								class="far fa-edit"></i> Edit</a> &nbsp; 
-							<a class="btn btn-danger btn-sm"
-							th:href="@{'/admin/delete/'+${item.id}}"><i
-								class="fas fa-trash-alt"></i> Delete</a>
+						<td><a class="btn btn-success btn-sm" th:href="@{'/admin/edit/'+${item.id}}">
+								<i class="far fa-edit"></i> Edit
+							</a>
+							&nbsp; 
+							<a class="btn btn-danger btn-sm" th:href="@{'/admin/delete/'+${item.id}}">
+							 	<i class="fas fa-trash-alt"></i> Delete
+							</a>
 						</td>
 					</tr>
-
 				</tbody>
 			</table>
 		</div>
